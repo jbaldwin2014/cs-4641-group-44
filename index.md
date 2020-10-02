@@ -22,7 +22,7 @@ To complete our project, we will primarily use datasets from Kaggle and the CDC 
 
 ### Results
 
-Pre-existing data shows some trends in ages and pre-existing conditions, but gender and race are not commonly factors taken into consideration, and furthermore, some of this information is ignored by populations, and the source of this information is not always clear. By taking into account this extra data, and using it to predict future deaths, we hope to reveal more detail about risk factors and further enlighten the population on what groups are at risk using data they can see and understand. We expect atleats %95 accuracy to predict death probability for patients with COVID.  
+Pre-existing data shows some trends in ages and pre-existing conditions, but gender and race are not commonly factors taken into consideration, and furthermore, some of this information is ignored by populations, and the source of this information is not always clear. By taking into account this extra data, and using it to predict future deaths, we hope to reveal more detail about risk factors and further enlighten the population on what groups are at risk using data they can see and understand. We expect atleast %95 accuracy to predict death probability for patients with COVID.  
 
 ### Discussion
 
