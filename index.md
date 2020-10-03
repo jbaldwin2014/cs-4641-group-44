@@ -12,7 +12,7 @@ layout: default
 The death toll of the 2019 coronavirus disease (CoViD-19) has reached above 200,000 just in the U.S. CoViD-19 has been shown to affect various demographics of population differently. Certain factors like age and pre-existing health conditions have an impact on mortality outcome in CoViD-19 patients. People are not aware of their likelihood of death upon contraction of CoViD-19 and don’t have much information on which risk factors and predispositions negatively impact outcomes. The goal is to create a ML model which would predict the chance/risk of someone dying from CoViD-19 given biological factors and pre-existing diseases in order to increase awareness and responsibility for one's well-being in this crisis.
 
 #### Dataset
-Ideally, our dataset will consist of data points (rows) that represent one patient, where the columns are the features (such as age, gender, other health risk factors) with a label that represents the risk of that person dying from COVID.
+To complete our project, we will primarily use datasets from Kaggle and the CDC containing information about reported CoViD-19 deaths. Ideally, our dataset will consist of data points (rows) that represent a state, where the columns are the features (such as age, gender, other health risk factors) with a label that represents the cause of death for that person with CoViD-19. With the dataset also having labels that describe the amount of patients that survived CoViD with these factors, we could use this data as our ground truth when examining our unsupervised algorithm.  Though there are some data points with empty columns(unknown race, unknown pre-existing disease), with 6.5k rows of data points, we believe that we have more than enough data for our algorithm. After a dataset cleanup with data that is provided on a weekly basis, whereas there are no empty datasets, the accuracy in the prediction of death chance determined by the factors will significantly increase. 
 
 
 ### Methods
@@ -32,12 +32,22 @@ Both of these algorithms will have the flexibility to be able to be run over mul
 
 ### Results
 
-Pre-existing data shows some trends in ages and pre-existing conditions, but gender and race are not commonly factors taken into consideration, and furthermore, some of this information is ignored by populations, and the source of this information is not always clear. By taking into account this extra data, and using it to predict future deaths, we hope to reveal more detail about risk factors and further enlighten the population on what groups are at risk using data they can see and understand. We expect atleast %95 accuracy to predict death probability for patients with COVID.  
-
+Pre-existing data shows early trends in how certain conditions may increase the risk of death from CoVid-19. However, there is limited concrete understanding of exactly which individual conditions contribute most to this risk, and even less information about how having a multitude of conditions will affect risk. By taking into account a wide range of data that encompasses not just health conditions, but also environmental and genetic factors, and using it to predict the likelihood of future deaths, we hope to reveal more detail about risk factors and further enlighten the population on what groups are at risk using data they can see and understand. We expect at least 95% accuracy to predict mortality probability for patients with CoViD-19. To evaluate how effective our algorithms perform, we will use recall and precision metrics and expect scores of >0.9. 
+ 
 ### Discussion
 
-The motivations and goals for this project are that we want to know what factors primarily contribute to deaths related to COVID such as age, race, gender, location, pre-existing conditions, and any other relevant data that may give us some indication about the groups most affected by COVID-19. The best outcome would be to have a prediction model using the most accurate ML algorithm that uses pre-existing data on these factors to predict and understand which factors are the cause of the most deaths when in combination with COVID. If none of the observed ML algorithm was found to predict the probability accurately enough, then we will move on to testing dimension reduction accuracy on the probability predicion. This is all done due to the importance for identifying the most at-risk groups and reiterating the importance of social distancing and masks in order to prevent the spread of COVID to these groups.
+It is easy to ignore risk when risk is not well understood. Our goal is to present the general population with data that is easy to understand, digest, and interpret that provides a clear picture of how at-risk they may be from a CoVid-19 infection. When faced with the issue of deciding when to re-open our economies and the risk of “second wave” increases in infections, we want to do our best to ensure everyone is fully informed on how an infection may affect them personally. This is done in order to identify the most at-risk groups and to reiterate the importance of social distancing and mask wearing in order to prevent the spread of CoViD-19 to these groups.
 
 ### References
 
 *   https://www.cdc.gov/nchs/nvss/vsrr/covid19/health_disparities.htm
+https://towardsdatascience.com/predicting-mortality-in-the-icu-2e4832cc94d2
+
+https://data.cdc.gov/NCHS/Deaths-involving-coronavirus-disease-2019-CoViD-19/ks3g-spdg
+
+https://www.cdc.gov/coronavirus/2019-ncov/CoViD-data/investigations-discovery/assessing-risk-factors.html
+
+https://www.news-medical.net/news/20200927/Risk-factors-for-mortality-among-hospitalized-patients-with-CoViD-19.aspx
+
+https://ourworldindata.org/mortality-risk-CoViD
+
