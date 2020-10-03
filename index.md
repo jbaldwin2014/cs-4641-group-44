@@ -8,10 +8,10 @@ layout: default
 
 ### Introduction
 
-## Background
+#### Background
 There are currently thousands of cases where patients in hospitals either die from a heightened severity due to a pre-existing condition they’ve had before contracting COVID or having the underlying cause of death be from COVID itself. There’s an ongoing issue in the U.S in which people are not aware of their death risk if they were to contract COVID based on the diseases they have at the concurrent time and their biological factors. The goal is to create a ML algorithm from a clustering technique that would predict the chance/risk of someone dying from COVID if they were to have a pre-existing disease in order to increase awareness and responsibility for one's well-being in this crisis. Our current potential unsupervised methods we want to test out include fuzzy clustering, SVM, and decision trees. The algorithm that shows the most accuarte predictablility in deaths will be used throughout the project towards the intended desirability of our results in calculating percentage chance of dying with COVID. 
 
-## Dataset
+#### Dataset
 Ideally, our dataset will consist of data points (rows) that represent one patient, where the columns are the features (such as age, gender, other health risk factors) with a label that represents the risk of that person dying from COVID.
 
 
