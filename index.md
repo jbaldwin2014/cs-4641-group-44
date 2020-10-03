@@ -32,3 +32,6 @@ The motivations and goals for this project are that we want to know what factors
 ### References
 
 *   https://www.cdc.gov/nchs/nvss/vsrr/covid19/health_disparities.htm
+*   https://www.cdc.gov/coronavirus/2019-ncov/covid-data/investigations-discovery/assessing-risk-factors.html
+*   https://www.news-medical.net/news/20200927/Risk-factors-for-mortality-among-hospitalized-patients-with-COVID-19.aspx
+*   https://ourworldindata.org/mortality-risk-covid
