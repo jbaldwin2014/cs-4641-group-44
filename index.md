@@ -41,13 +41,14 @@ It is easy to ignore risk when risk is not well understood. Our goal is to prese
 ### References
 
 *   https://www.cdc.gov/nchs/nvss/vsrr/covid19/health_disparities.htm
-https://towardsdatascience.com/predicting-mortality-in-the-icu-2e4832cc94d2
 
-https://data.cdc.gov/NCHS/Deaths-involving-coronavirus-disease-2019-CoViD-19/ks3g-spdg
+    https://towardsdatascience.com/predicting-mortality-in-the-icu-2e4832cc94d2
 
-https://www.cdc.gov/coronavirus/2019-ncov/CoViD-data/investigations-discovery/assessing-risk-factors.html
+    https://data.cdc.gov/NCHS/Deaths-involving-coronavirus-disease-2019-CoViD-19/ks3g-spdg
 
-https://www.news-medical.net/news/20200927/Risk-factors-for-mortality-among-hospitalized-patients-with-CoViD-19.aspx
+    https://www.cdc.gov/coronavirus/2019-ncov/CoViD-data/investigations-discovery/assessing-risk-factors.html
 
-https://ourworldindata.org/mortality-risk-CoViD
+    https://www.news-medical.net/news/20200927/Risk-factors-for-mortality-among-hospitalized-patients-with-CoViD-19.aspx
+
+    https://ourworldindata.org/mortality-risk-CoViD
 
