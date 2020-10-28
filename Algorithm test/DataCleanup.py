@@ -8,7 +8,7 @@ import matplotlib
 
 
 # read the data
-df = pd.read_csv('sberbank.csv')
+df = pd.read_csv('COVID_Data.csv')
 
 # shape and data types of the data
 print(df.shape)
