@@ -18,7 +18,7 @@ print(df.dtypes)
 featuresArr = df.columns.values
 print('featureArr:' + featuresArr)
 
-# deleting unneeded features, which would be the first 3 columns
+# deleting unneeded features, which would be the first 3 columns (dates)
 cols_to_drop = featuresArr[:3]
 df = df.drop(cols_to_drop, axis=1)
 print(df.columns.values)
