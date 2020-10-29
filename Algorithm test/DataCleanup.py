@@ -25,9 +25,16 @@ print(featuresArr)
 
 # drop rows with missing or unknown values.
 # drop rows with missing or unknown values.
-df = df[df.icu_yn != 'Missing']
-df = df[df.icu_yn != 'Unknown']
-df = df[df.icu_yn != 'NA']
+df = df[df.age_group != 'Missing']
+df = df[df.age_group != 'Unknown']
+df = df[df.age_group != 'NA']
+df = df[df.death_yn != 'Missing']
+df = df[df.death_yn != 'Unknown']
+df = df[df.death_yn != 'NA']
+df = df[df.medcond_yn != 'Missing']
+df = df[df.medcond_yn != 'Unknown']
+df = df[df.medcond_yn != 'NA']
+
 
 
 
