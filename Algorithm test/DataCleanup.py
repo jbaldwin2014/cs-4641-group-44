@@ -24,6 +24,7 @@ df_non_numeric = df.select_dtypes(exclude=[np.number])
 non_numeric_cols = df_non_numeric.columns.values
 print(non_numeric_cols)
 
+# hello world
 
 
 
