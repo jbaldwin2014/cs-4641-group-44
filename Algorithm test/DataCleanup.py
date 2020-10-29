@@ -16,7 +16,7 @@ print(df.dtypes)
 
 # select columns
 featuresArr = df.columns.values
-print(featuresArr)
+print('featureArr:' + featuresArr)
 
 # deleting unneeded features, which would be the first 3 columns
 cols_to_drop = featuresArr[:3]
