@@ -8,23 +8,24 @@ import matplotlib
 
 
 # read the data
-df = pd.read_csv('COVID_Data.csv')
+df = pd.read_csv(r'C:\Users\ibrad\PycharmProjects\COVID_predProj\datasets\COVID_Data.csv')
 
 # shape and data types of the data
 print(df.shape)
 print(df.dtypes)
 
-# select numeric columns
-df_numeric = df.select_dtypes(include=[np.number])
-numeric_cols = df_numeric.columns.values
-print(numeric_cols)
+# select columns
+featuresArr = df.columns.values
+print(featuresArr)
 
-# select non numeric columns
-df_non_numeric = df.select_dtypes(exclude=[np.number])
-non_numeric_cols = df_non_numeric.columns.values
-print(non_numeric_cols)
+# deleting unneeded features, which would be the first 3 columns
+cols_to_drop = featuresArr[:3]
+df = df.drop(cols_to_drop, axis=1)
+print(df.columns.values)
 
-# hello world hello ibrahima
+
+print(df.shape)
+print(df.dtypes)
 
 
 
