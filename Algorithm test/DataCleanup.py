@@ -45,7 +45,7 @@ df = df.drop(cols_to_drop, axis=1)
 print(df.columns.values)
 print(df.shape)
 
-# Drop rows with any empty cells
+# Drop rows with any empty cells in them
 df.dropna(
     axis=0,
     how='any',
@@ -55,7 +55,5 @@ df.dropna(
 )
 
 df.to_csv(r'C:\Users\ibrad\PycharmProjects\cleaned_COVID_Data.csv')
-
-
 
 
