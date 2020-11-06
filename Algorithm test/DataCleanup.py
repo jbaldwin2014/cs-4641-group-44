@@ -66,17 +66,25 @@ df.dropna(
 encode_medcond = {"medcond_yn": {"Yes": 1, "No": 0}}
 print(encode_medcond)
 df = df.replace(encode_medcond)
+
 encode_death = {"death_yn": {"Yes": 1, "No": 0}}
 print(encode_death)
 df = df.replace(encode_death)
+
 encode_sex = {"sex": {"Male": 1, "Female": 0}}
 print(encode_sex)
 df = df.replace(encode_sex)
+
 encode_age_group = {"age_group": {"0 - 9 Years": 0, "10 - 19 Years": 1, "20 - 29 Years": 2, "30 - 39 Years": 3, "40 - 49 Years": 4, "50 - 59 Years": 5, "60 - 69 Years": 6, "70 - 79 Years": 7, "80+ Years": 8}} # dont know how to 1HE this yet
 print(encode_age_group)
 df = df.replace(encode_age_group)
 print(df["age_group"].value_counts())
 
-df.to_csv(r'C:\Users\ibrad\PycharmProjects\cleaned_COVID_Data.csv')
+encode_race = {"race_ethnicity_combo": {"White, Non-Hispanic": 0, "Hispanic/Latino": 1, "Black, Non-Hispanic": 2, "Multiple/Other, Non-Hispanic": 3, "Asian, Non-Hispanic": 4, "American Indian/Alaska Native, Non-Hispanic": 5, "Native Hawaiian/Other Pacific Islander, Non-Hispanic": 6}} # dont know how to 1HE this yet
+print(encode_race)
+df = df.replace(encode_race)
+
+
+df.to_csv(r'C:\Users\ibrad\PycharmProjects\cleaned_encoded_COVID_Data.csv')
 
 
