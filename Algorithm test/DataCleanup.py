@@ -14,6 +14,9 @@ import matplotlib
 # read the data
 df = pd.read_csv(r'C:\Users\ibrad\PycharmProjects\Datasets\COVID_Data.csv')
 
+# rename race column to better format
+df = df.rename(columns={'Race and ethnicity (combined)': 'race_ethnicity_combo'})
+
 # shape and data types of the data
 print(df.shape)
 print(df.dtypes)
@@ -37,6 +40,8 @@ df = df[df.medcond_yn != 'NA']
 df = df[df.current_status != 'Probable Case']
 df = df[df.hosp_yn != 'Missing']
 df = df[df.hosp_yn != 'Unknown']
+df = df[df.race_ethnicity_combo != 'Unknown']
+df = df[df.race_ethnicity_combo != 'NA']
 
 
 
