@@ -34,6 +34,7 @@ df = df[df.death_yn != 'NA']
 df = df[df.medcond_yn != 'Missing']
 df = df[df.medcond_yn != 'Unknown']
 df = df[df.medcond_yn != 'NA']
+df = df[df.current_status != 'Probable Case']
 
 
 
