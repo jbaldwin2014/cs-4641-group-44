@@ -55,6 +55,17 @@ df.dropna(
     inplace=True
 )
 
+# integer encoding
+encode_medcond = {"medcond_yn": {"Yes": 1, "No": 0}}
+print(encode_medcond)
+df = df.replace(encode_medcond)
+encode_death = {"death_yn": {"Yes": 1, "No": 0}}
+print(encode_death)
+df = df.replace(encode_death)
+encode_sex = {"sex": {"Male": 1, "Female": 0}}
+print(encode_sex)
+df = df.replace(encode_sex)
+
 df.to_csv(r'C:\Users\ibrad\PycharmProjects\cleaned_COVID_Data.csv')
 
 
