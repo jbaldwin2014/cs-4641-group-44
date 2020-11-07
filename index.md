@@ -72,9 +72,11 @@ Similarly, because we only wanted to look at data on confirmed cases of CoViD-19
 After the stages of cutting out data, we were left with a sizable 596807 data points to run our algorithms on. Before running these algorithms, however, it was imperative to standardize our data. Many of our remaining features were entirely categorical, making it impossible to run many unsupervised learning algorithms. To solve this issue, we wrote Python code to encode these categorical features as integers indicating ‘0’ as false and ‘1’ as true in some cases, or by using a range of integers based on the number of possible labels for a given feature.
 
 ![Branching](img/encodeagegroup.png)
+
 Above: Example Code Used to Perform Integer Encoding of Categorical Features
 
 ![Branching](img/encodeddata.png)
+
 Above: Example of Cleaned and Encoded Data
 
 #### Identifying Important Features
@@ -86,11 +88,13 @@ In order to understand which of the categorical pre-existing health factors cont
 The first step in this process is to identify the optimal number of clusters to use in our K-Modes cluster predictions. To do this, we decided to implement the elbow method in order to determine this optimal number of clusters using a range of values for k between 1 and 25. Then, for each value of k, we computed an average score for all clusters, which in our cases represents the distortion cost. By default, the distortion cost is computed as the sum of square distances from each point to its assigned cluster center.
 
 ![Branching](img/numclusters.png)
+
 Above: Code Used to Determine Clustering Cost
 
 A plot of our elbow method will then be created in order to have a better visual understanding of what the optimal number of clusters should be. This number is chosen based on a quick analysis to time a value of k after which cost reduction does not decrease dramatically, located at the “elbow” of the plot.
 
 ![Branching](img/elbowmethod.png)
+
 Above: Code Used to Create Our Elbow Plot
 
 We then computed the cost given an increasing number of cluster centers and predicted the cluster index for each sample by minimizing a dissimilarity measure, whereas k modes count the number of “features” that are not the same. 
@@ -98,15 +102,19 @@ We then computed the cost given an increasing number of cluster centers and pred
 #### Elbow Method Results
 
 ![Branching](img/Figure_3.png)
+
 Above: (25 Clusters)
 
 ![Branching](img/Figure_2.png)
+
 Above: (15 clusters)
 
 ![Branching](img/runs.png)
+
 Above: Example of Terminal Output
 
 ![Branching](img/predictcluster.png)
+
 Above: Example of Starting Data With Predicted Cluster from K-Modes
 
 The elbow-method graphed results above show that the optimal number of clusters for our dataset appears at about 5 clusters, exemplified in the 15 and 25 cluster run. Furthermore, as the amount of clusters increases, the cost decreases as the curve above shows. For each iteration, the amount of moves needed decreases, though the cost stays mostly stagnant, changing by very little if at all, the approximate range being about 1,000,000 - 2,000,000.
@@ -114,12 +122,15 @@ The elbow-method graphed results above show that the optimal number of clusters 
 Our results clearly show not only that we can group our data into clusters based on these features, but also that the optimal number of clusters for grouping is k=5. With this in mind, we are able to run the K-Modes algorithm and visualize our results:
 
 ![Branching](img/clustercode.png)
+
 Above: Code Used to Run K-Modes with k=5
 
 ![Branching](img/barchart2.png)
+
 Above: Bar Chart on Age-Group with an Optimal 5 Clusters
 
 ![Branching](img/barchart.png)
+
 Above: Example, Another Bar Chart on Age-Group with only 2 Clusters
 
 We can view our data based on certain features and their data counts (shown by the bar graph above). For our visualizations, we used age-range as our clustering basis, comparing the count of data points in each cluster for each age range. Beyond just showing that ages 40-59 have the highest count of cases, our clusters also indicate grouping by other categorical features that could contribute to risk of CoViD-19 death. In both bar charts, cluster 0.0 represents data points that were clustered by the co-occurrence of ICU hospitalization and the existence of pre-existing health conditions. Because of this, our K-Modes algorithm indicates higher counts of CoViD-19 death in every age range for this cluster. Qualitatively, this means that these factors contribute significantly to the probability that an individual will succumb to a case of CoViD-19.
@@ -127,7 +138,7 @@ We can view our data based on certain features and their data counts (shown by t
 Empirically, our K-Modes defines clusters using the amount of matching categories between data points. For example, take clusters 2 and 3 in the above example run with 5 total clusters. For the mode of each cluster, if a data point has a given categorical feature, the mode vector K consists of x categorical values for which each is the mode of a feature. For our data, the mode of an attribute can be “1” or “0” for category features that can be defined as true or false, and from 0-8 for features like age group and race/ethnicity. The mode becomes whichever number is most common in the cluster. The total number of labels that appeared on each predicted index cluster can be seen through the visualization above for the age group feature. From observation, it can be seen that the cluster at index 0 seemed to have the largest number of datasets, making it seem to have a unique constraint to its index, and thus indicating that tease features contribute most to the likelihood of a CoViD-19 death.
 
 ### Current Challenges and Next Steps
-For this report, the current challenges our group has encountered so far are as follows: in cleaning and standardizing our data, we had to remove some data points that had too many missing or unknowns, which left only a small chunk of the original data left, though since we started with so many data points to begin with, around 4.5 million, the loss is mostly negligible, leaving us with about 500k points with encoding and cleaning. Our GMM implementation runs without error, and our current challenge lies with properly visualizing the data in graph form by category. We tried two different implementations and have settled on one of which we are now trying to iron out a few small bugs in displaying our data correctly. We also have started on a supervised technique, binary logistic regression since we have many categorical independent variables and only two possible outcomes. Furthermore, we started a PCA algorithm to define the optimal amount of clusters for our dataset, but as it seems to only take numeric values in order to become most effective in determining the most important features needed, it seemed inefficient to use. 
+For this report, the current challenges our group has encountered so far are as follows: in cleaning and standardizing our data, we had to remove some data points that had too many missing or unknowns, which left only a small chunk of the original data left. However, because we started with so many data points to begin with, around 4.5 million, the loss is mostly negligible, leaving us with about 500k points with encoding and cleaning. Our K-Modes implementation runs without error, and our current challenge primarily lies in creating proper visualizations of the data in graph form by category. We tried different implementations and have settled on K-Modes, as so far this has provided us the best visual representations of our clustering, and works well with categorical data. We also have started on a supervised technique, binary logistic regression, because we have these many categorical independent variables and only two possible outcomes.
 
 ### References:
 
