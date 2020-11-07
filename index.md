@@ -57,18 +57,6 @@ It is easy to ignore risk when risk is not well understood. Our goal is to prese
 
 ### Midterm Report
 
-#### Progress Highlights
-
-We settled on a dataset from the CDC database that consisted of over 4 million data points of individual recorded cases of which 2 million had label data on death outcome. For our first step of data cleaning, using python code, we removed entire columns with information on recorded dates since it wasn’t important data for our goal. We also only kept data of lab-confirmed CoViD cases as opposed to probable cases. Next, we removed entries that had unknown or missing information in features such as age, sex, and comorbidity. Since we don’t have pre-existing knowledge of how to group our patients based on what categories they are in, there will be no training set since our unsupervised algorithm will showcase the combinations of characteristics that will break each patient into different categories.
-
-When working with a dataset with many features, principal component analysis is a powerful tool to determine which features actually contribute to the variance in the data set and which are redundant. While this definitely could have been of great help to us in determining which features to consider, unfortunately, due to the nature of our data set, it was difficult to get this to work with non-numeric features. As such, we took the previously described manual approach to data cleaning. Thankfully, the data in our data set already conformed to our standardization criteria. All that remained from this point was to run our unsupervised learning algorithms.
-
-For our unsupervised learning technique, we were unable to use the k-means algorithm mainly due to our data being categorical rather than being numerical. The most ideal method to use in this case would be the k-mode algorithm due to its reliability in training truth (1) or false (0) data. We can find the optimal number of clusters by the elbow method in the k-modes algorithm, which could be used to show if this algorithm is inefficient or not based on the analysis of the elbow point in the model with the increasing number of clusters in the x-axis and the hamming distance in the y-axis of the graph.
-
-#### Current Challenges
-
-For this report, the current challenges our group has encountered so far are as follows: in cleaning and standardizing our data, we had to remove some data points that had too many missing or unknowns, which left only a small chunk of the original data left, though since we started with so many data points to begin with, around 4.5 million, the loss is mostly negligible, leaving us with about 700k points. Our GMM implementation runs without error, and our current challenge lies with properly visualizing the data in graph form by category. We tried two different implementations and have settled on one of which we are now trying to iron out a few small bugs in displaying our data correctly. We also have started on a supervised technique, binary logistic regression since we have many categorical independent variables and only two possible outcomes.
-
 #### Progress Highlights:
 
 ##### Dataset
