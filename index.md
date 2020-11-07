@@ -57,84 +57,102 @@ It is easy to ignore risk when risk is not well understood. Our goal is to prese
 
 ### Midterm Report
 
-![Branching](img/figure2.png)
+#### Progress Highlights
 
-### Progress Highlights
+We settled on a dataset from the CDC database that consisted of over 4 million data points of individual recorded cases of which 2 million had label data on death outcome. For our first step of data cleaning, using python code, we removed entire columns with information on recorded dates since it wasn’t important data for our goal. We also only kept data of lab-confirmed CoViD cases as opposed to probable cases. Next, we removed entries that had unknown or missing information in features such as age, sex, and comorbidity. Since we don’t have pre-existing knowledge of how to group our patients based on what categories they are in, there will be no training set since our unsupervised algorithm will showcase the combinations of characteristics that will break each patient into different categories.
 
-#### Dataset
+When working with a dataset with many features, principal component analysis is a powerful tool to determine which features actually contribute to the variance in the data set and which are redundant. While this definitely could have been of great help to us in determining which features to consider, unfortunately, due to the nature of our data set, it was difficult to get this to work with non-numeric features. As such, we took the previously described manual approach to data cleaning. Thankfully, the data in our data set already conformed to our standardization criteria. All that remained from this point was to run our unsupervised learning algorithms.
+
+For our unsupervised learning technique, we were unable to use the k-means algorithm mainly due to our data being categorical rather than being numerical. The most ideal method to use in this case would be the k-mode algorithm due to its reliability in training truth (1) or false (0) data. We can find the optimal number of clusters by the elbow method in the k-modes algorithm, which could be used to show if this algorithm is inefficient or not based on the analysis of the elbow point in the model with the increasing number of clusters in the x-axis and the hamming distance in the y-axis of the graph.
+
+#### Current Challenges
+
+For this report, the current challenges our group has encountered so far are as follows: in cleaning and standardizing our data, we had to remove some data points that had too many missing or unknowns, which left only a small chunk of the original data left, though since we started with so many data points to begin with, around 4.5 million, the loss is mostly negligible, leaving us with about 700k points. Our GMM implementation runs without error, and our current challenge lies with properly visualizing the data in graph form by category. We tried two different implementations and have settled on one of which we are now trying to iron out a few small bugs in displaying our data correctly. We also have started on a supervised technique, binary logistic regression since we have many categorical independent variables and only two possible outcomes.
+
+#### Progress Highlights:
+
+##### Dataset
 For our project, we used a public dataset from a CDC database containing CoViD-19 case surveillance information. Each data point represents a deidentified patient and includes their age, sex, presence of comorbidity, hospitalization status, etc. as well as binary class data on death outcome, which can be used as ground-truth label for some algorithms. Though there are some data points with empty columns (unknown race, unknown pre-existing disease), the raw dataset has over five million points and 11 features. Over the course of our project thus far, we have taken steps to clean, standardize, and run unsupervised learning algorithms on our data in order to better understand how these risk factors contribute to the likelihood that a patient who has contracted CoViD-19 will die. Our dataset did not seem to contain any outliers.
 
-#### Data Cleaning and Standardization
+##### Data Cleaning and Standardization
 With our data set only containing 11 features to begin with, data cleaning was fairly straightforward given visual analysis and modification through Python code. We determined that features involving dates, such as CDC report dates and symptom onset dates, were discarded as it is easy to understand that the day an individual contracts CoViD-19 does not contribute to their risk of death. Based on this assumption, we decided to cut the number of features down to six by removing these unwanted features.
 
 Similarly, because we only wanted to look at data on confirmed cases of CoViD-19, we removed data points marked with the label ‘probable case’, as we only wanted to look at data marked ‘lab-confirmed case’. Finally, rows containing values of ‘missing’, ‘NA’, or ‘unknown’ in regard to any feature were also completely eliminated from the set. 
 
 After the stages of cutting out data, we were left with a sizable 596807 data points to run our algorithms on. Before running these algorithms, however, it was imperative to standardize our data. Many of our remaining features were entirely categorical, making it impossible to run many unsupervised learning algorithms. To solve this issue, we wrote Python code to encode these categorical features as integers indicating ‘0’ as false and ‘1’ as true in some cases, or by using a range of integers based on the number of possible labels for a given feature.
 
-![Branching](img/encodeagegroup.png)
+
 Above: Example Code Used to Perform Integer Encoding of Categorical Features
 
-![Branching](img/encodeddata.png)
+
 Above: Example of Cleaned and Encoded Data
 
-#### Identifying Important Features
+Identifying Important Features
 After cleaning and standardizing our data set, the next crucial step is identifying which features contribute to the majority of the variance in the data, and which can be discarded as irrelevant. This can be done in one of two ways. First, in datasets with high dimensionality, Principal Component Analysis, or PCA, can be used to empirically determine which features are most important. In cases of low dimensionality, such as our dataset that contains only six features after data cleaning, a more qualitative method can be employed. In our case, we were able to determine that, based on the goal of our project, all but one of the remaining features were crucial in order to get a complete understanding of how each contributes to the likelihood of a CoViD-19 fatality. Because we had removed data points labeled ‘probable case,’ this only left one type of data remaining for this feature. This means that this feature would not at all contribute to variance in our data and, for this reason, we decided to continue by running our unsupervised learning algorithms on the remaining five features.
 
-#### Unsupervised Learning: Kmode Clustering
+Unsupervised Learning: Kmode Clustering
 In order to understand which of the categorical pre-existing health factors contribute most to the probability of a CoViD-19 fatality, we decided to implement the K-Modes clustering algorithm as our unsupervised learning technique. When run on our chosen data sets, the output of this K-Modes algorithm is expected to, ideally, group CoViD-19 deaths data points by the co-occurrence of similar factors into various n-dimensional groups, identifying pre-existing risk factors that, when combined, contribute to an increase the risk of death from CoViD-19.
 
 The first step in this process is to identify the optimal number of clusters to use in our K-Modes cluster predictions. To do this, we decided to implement the elbow method in order to determine this optimal number of clusters using a range of values for k between 1 and 25. Then, for each value of k, we computed an average score for all clusters, which in our cases represents the distortion cost. By default, the distortion cost is computed as the sum of square distances from each point to its assigned cluster center.
 
-![Branching](img/numclusters.png)
+
 Above: Code Used to Determine Clustering Cost
 
 A plot of our elbow method will then be created in order to have a better visual understanding of what the optimal number of clusters should be. This number is chosen based on a quick analysis to time a value of k after which cost reduction does not decrease dramatically, located at the “elbow” of the plot.
 
-![Branching](img/elbowmethod.png)
+
 Above: Code Used to Create Our Elbow Plot
 
 We then computed the cost given an increasing number of cluster centers and predicted the cluster index for each sample by minimizing a dissimilarity measure, whereas k modes count the number of “features” that are not the same. 
 
-#### Elbow Method Results
 
-![Branching](img/Figure_3.png)
+
+
+
+Elbow Method Results
+
 Above: (25 Clusters)
 
-![Branching](img/Figure_2.png)
 Above: (15 clusters)
 
-![Branching](img/runs.png)
+
+
 Above: Example of Terminal Output
 
-![Branching](img/predictcluster.png)
+
 Above: Example of Starting Data With Predicted Cluster from K-Modes
 
-The elbow-method graphed results above show that the optimal number of clusters for our dataset appears at about 5 clusters, exemplified in the 15 and 25 cluster run. Furthermore, as the amount of clusters increases, the cost decreases as the curve above shows. For each iteration, the amount of moves needed decreases, though the cost stays mostly stagnant, changing by very little if at all, the approximate range being about 1,000,000 - 2,000,000.
+The elbow-method graphed results above show that the optimal number of clusters for our dataset appears at about 5 clusters, exemplified by the sharp plateau at k=5 in our 15 and 25 cluster runs. While costs do decrease beyond this point, such diseases are trivial compared to the significant and sharp increase in the amount of time it takes to run our implementation of the K-Modes algorithm. For each iteration, the amount of moves needed decreases, though the cost stays mostly stagnant, changing by very little if at all, with the approximate range being about 1,000,000 - 2,000,000.
 
 Our results clearly show not only that we can group our data into clusters based on these features, but also that the optimal number of clusters for grouping is k=5. With this in mind, we are able to run the K-Modes algorithm and visualize our results:
 
-![Branching](img/clustercode.png)
+
 Above: Code Used to Run K-Modes with k=5
 
-![Branching](img/barchart2.png)
+
 Above: Bar Chart on Age-Group with an Optimal 5 Clusters
 
-![Branching](img/barchart.png)
 Above: Example, Another Bar Chart on Age-Group with only 2 Clusters
 
-We can view our data based on certain features and their data counts (shown by the bar graph above). For our visualizations, we used age-range as our clustering basis, comparing the count of data points in each cluster for each age range. Beyond just showing that ages 40-59 have the highest count of cases, our clusters also indicate grouping by other categorical features that could contribute to risk of CoViD-19 death. In both bar charts, cluster 0.0 represents data points that were clustered by the co-occurrence of ICU hospitalization and the existence of pre-existing health conditions. Because of this, our K-Modes algorithm indicates higher counts of CoViD-19 death in every age range for this cluster. Qualitatively, this means that these factors contribute significantly to the probability that an individual will succumb to a case of CoViD-19.
+We can view our data based on certain features and their data counts (shown by the bar graph above). For our visualizations, we used age-range as our clustering basis, comparing the count of data points in each cluster for each age range. Beyond just showing that ages 40-59 have the highest count of cases, our clusters also indicate grouping by other categorical features that could contribute to risk of CoViD-19 death. In both bar charts, cluster 0 represents data points that were clustered by the co-occurrence of ICU hospitalization and the existence of pre-existing health conditions. Because of this, our K-Modes algorithm indicates higher counts of CoViD-19 death in every age range for this cluster. Qualitatively, this means that these factors contribute significantly to the probability that an individual will succumb to a case of CoViD-19.
 
 Empirically, our K-Modes defines clusters using the amount of matching categories between data points. For example, take clusters 2 and 3 in the above example run with 5 total clusters. For the mode of each cluster, if a data point has a given categorical feature, the mode vector K consists of x categorical values for which each is the mode of a feature. For our data, the mode of an attribute can be “1” or “0” for category features that can be defined as true or false, and from 0-8 for features like age group and race/ethnicity. The mode becomes whichever number is most common in the cluster. The total number of labels that appeared on each predicted index cluster can be seen through the visualization above for the age group feature. From observation, it can be seen that the cluster at index 0 seemed to have the largest number of datasets, making it seem to have a unique constraint to its index, and thus indicating that tease features contribute most to the likelihood of a CoViD-19 death.
 
-### Current Challenges and Next Steps
+Current Challenges and Next Steps
 For this report, the current challenges our group has encountered so far are as follows: in cleaning and standardizing our data, we had to remove some data points that had too many missing or unknowns, which left only a small chunk of the original data left, though since we started with so many data points to begin with, around 4.5 million, the loss is mostly negligible, leaving us with about 500k points with encoding and cleaning. Our GMM implementation runs without error, and our current challenge lies with properly visualizing the data in graph form by category. We tried two different implementations and have settled on one of which we are now trying to iron out a few small bugs in displaying our data correctly. We also have started on a supervised technique, binary logistic regression since we have many categorical independent variables and only two possible outcomes. Furthermore, we started a PCA algorithm to define the optimal amount of clusters for our dataset, but as it seems to only take numeric values in order to become most effective in determining the most important features needed, it seemed inefficient to use. 
 
-### References:
 
-*   https://data.cdc.gov/Case-Surveillance/COVID-19-Case-Surveillance-Public-Use-Data/vbim-akqf 
 
-*   https://medium.com/@davidmasse8/unsupervised-learning-for-categorical-data-dd7e497033ae 
 
-*   https://pypi.org/project/kmodes/
 
-*   https://www.researchgate.net/post/K_modes_clustering_how_to_choose_the_number_of_clusters
+
+References:
+
+https://data.cdc.gov/Case-Surveillance/COVID-19-Case-Surveillance-Public-Use-Data/vbim-akqf 
+
+https://medium.com/@davidmasse8/unsupervised-learning-for-categorical-data-dd7e497033ae 
+
+https://pypi.org/project/kmodes/
+
+https://www.researchgate.net/post/K_modes_clustering_how_to_choose_the_number_of_clusters
+
