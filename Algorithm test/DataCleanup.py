@@ -12,7 +12,7 @@ import matplotlib.mlab as mlab
 import matplotlib
 
 # read the data
-df = pd.read_csv(r'C:\Users\ibrad\PycharmProjects\Datasets\COVID_Data.csv')
+df = pd.read_csv(r'C:\Users\shubh\PycharmProjects\cs4641\COVID_Data.csv')
 
 # rename race column to better format
 df = df.rename(columns={'Race and ethnicity (combined)': 'race_ethnicity_combo'})
@@ -26,7 +26,6 @@ featuresArr = df.columns.values
 print(featuresArr)
 
 
-# drop rows with missing or unknown values.
 # drop rows with missing or unknown values.
 df = df[df.age_group != 'Missing']
 df = df[df.age_group != 'Unknown']
@@ -42,6 +41,9 @@ df = df[df.hosp_yn != 'Missing']
 df = df[df.hosp_yn != 'Unknown']
 df = df[df.race_ethnicity_combo != 'Unknown']
 df = df[df.race_ethnicity_combo != 'NA']
+
+df = df[df.icu_yn != 'Missing']
+df = df[df.icu_yn != 'Unknown']
 
 
 
@@ -79,6 +81,10 @@ encode_hosp = {"hosp_yn": {"Yes": 1, "No": 0}}
 print(encode_hosp)
 df = df.replace(encode_hosp)
 
+encode_icu = {"icu_yn": {"Yes": 1, "No": 0}}
+print(encode_icu)
+df = df.replace(encode_icu)
+
 encode_age_group = {"age_group": {"0 - 9 Years": 0, "10 - 19 Years": 1, "20 - 29 Years": 2, "30 - 39 Years": 3, "40 - 49 Years": 4, "50 - 59 Years": 5, "60 - 69 Years": 6, "70 - 79 Years": 7, "80+ Years": 8}} # dont know how to 1HE this yet
 print(encode_age_group)
 df = df.replace(encode_age_group)
@@ -89,6 +95,4 @@ print(encode_race)
 df = df.replace(encode_race)
 
 
-df.to_csv(r'C:\Users\ibrad\PycharmProjects\cleaned_encoded_COVID_Data.csv')
-
-
+df.to_csv(r'C:\Users\shubh\PycharmProjects\cs4641\cleaned_encoded_COVID_Data.csv')
