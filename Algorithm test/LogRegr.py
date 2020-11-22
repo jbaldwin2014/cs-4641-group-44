@@ -1,15 +1,23 @@
 # Step 1: Import packages, functions, and classes
 import pandas as pd
 import numpy as np
-from sklearn.linear_model import LogisticRegression
+from sklearn.linear_model import LogisticRegression, Lasso
 from sklearn.metrics import classification_report, confusion_matrix
+from sklearn.model_selection import train_test_split
 
 import matplotlib.pyplot as plt
 import matplotlib.mlab as mlab
 import matplotlib
 
+from yellowbrick.regressor import prediction_error
+
+from sklearn.linear_model import LassoCV
+from yellowbrick.regressor.alphas import alphas
+
+
 # Step 2: Get data
-df = pd.read_csv(r'C:\Users\shubh\PycharmProjects\cs4641\training_data.csv')  # read the data
+#df = pd.read_csv(r'C:\Users\shubh\PycharmProjects\cs4641\training_data.csv')  # read the data
+df = pd.read_csv(r'C:\Users\Jujin\Desktop\cs-4641-group-44\training_data.csv')
 npdata = df.to_numpy()
 x = npdata[:,3:]  # x = covid data mtx
 x = np.delete(x, 5, 1)  # delete death col
@@ -20,7 +28,7 @@ for i in range(len(ytemp)): # to fix mixed datatype problem
     if ytemp[i] == 1:
         y[i] = 1
 
-dftest = pd.read_csv(r'C:\Users\shubh\PycharmProjects\cs4641\test_data.csv')  # read the data
+dftest = pd.read_csv(r'C:\Users\Jujin\Desktop\cs-4641-group-44\test_data.csv')  # read the data
 npdatatest = dftest.to_numpy()
 xtest = npdatatest[:,3:]  # x = covid data mtx
 xtest = np.delete(xtest, 5, 1)  # delete death col
@@ -56,3 +64,7 @@ print(model.intercept_)
 #plt.show()
 
 print(model.score(xtest,ytest))
+
+alphas(LassoCV(random_state=0), x, y)
+model2 = Lasso()
+visualizer = prediction_error(model2, x, y, xtest, ytest)
