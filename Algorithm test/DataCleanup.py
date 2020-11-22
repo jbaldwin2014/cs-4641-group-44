@@ -28,6 +28,7 @@ print(featuresArr)
 
 # drop rows with missing or unknown values.
 df = df[df.sex != 'Other']
+df = df[df.sex != 'Missing']
 df = df[df.sex != 'Unknown']
 df = df[df.age_group != 'Missing']
 df = df[df.age_group != 'Unknown']
