@@ -5,6 +5,7 @@ from sklearn.svm import SVC
 from sklearn.model_selection import learning_curve
 from sklearn.model_selection import ShuffleSplit
 import numpy as np
+import sklearn.metrics as f1
 # import seaborn as sns
 
 
@@ -38,6 +39,8 @@ print("expected: ", expected_labels, "\n\n", "predicted: ", predicted_labels)
 accuracy = classifier.score(test_data.iloc[:,:-2], expected_labels)
 
 print("accuracy: ", accuracy)
+
+print("f1 score: ", f1.f1_score(expected_labels, predicted_labels))
 
 # classifier2 = GaussianNB()
 # classifier2.fit(training_data_plot.iloc[:,:-2], training_data_plot.iloc[:,-1])
