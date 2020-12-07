@@ -146,3 +146,139 @@ For this report, the current challenges our group has encountered so far are as 
 
 *   https://www.researchgate.net/post/K_modes_clustering_how_to_choose_the_number_of_clusters
 
+## ---
+
+### Final Report
+
+![Branching](img/figure3.png)
+
+### Supervised Learning + Performance Metrics
+
+#### Random Forest
+
+Our goal for this project is to create a classification model that can determine if a Covid-19 infection will be fatal or non-fatal to an individual given various information about said individual. To best accomplish this, a decision tree can be used in order to “split” the data along planes of greatest information gain in order to classify the outcome of a given data point. While this can be a powerful method, even better is the Random Forest model, which overall is more robust to overfitting and benefits from the utilization of multiple weak single decision trees in order to create a more accurate overall prediction. The primary advantages of using random forest with our data set is that, as an ensemble learning technique, random forest can ultimately predict the class of a data point better than a single decision tree ever could. To build this random forest, we used 3/4 of our data set as training data, and the remaining ¼ of data points were used to validate and test the performance of the random forest. The individual decision tree estimators for the random forest were trained to classify data points by the feature “death_yn” in our data set, as ultimately we wanted to predict the binary class indicating if a given individual would die from a Covid-19 infection.
+
+![Branching](img/randomforest1.png)
+
+_Above: Code Snippet Showing the Selection of Split that Provides Greatest Info Gain_
+
+In order to run random forest, the programmer must also choose various hyper-parameters, such as the number of estimators, or decision trees, to be trained in the forest, the maximum depth of each tree, and the maximum percentage of features to be randomly selected for training from the total number of features, such that it can be certain that there is some variation in the training data that the trees receive. Ultimately, these values were set to 8, 4, and 0.9 respectively after an iterative tuning process that ensured a high level of accuracy while ensuring not too much data was lost during the training process. The factors also played into the bootstrapping phase of the algorithm, where subsets of our larger data set are randomly selected for training. The number of features selected, 0.9, ensures that 90% of our dataset’s features will be used for training, which are randomly selected, all but making certain two training sets will never be identical.
+
+After running the random forest algorithm, our model is able to predict the death of a Covid 19 patient with a high accuracy of 98.7%. Accuracy, however, is not the only measure by which to judge the performance of this algorithm. In our case, achieving such a high accuracy, while desired, may be indicative of a problem or bias within our data set. Because it is important to be both accurate as well as minimize the number of false negative predictions, the recall metric can also be used to measure the performance of our model. For this metric, the random forest performed much worse, achieving only 61.8% recall. This is most likely due to the fact that with so few cases of death in our data set, a maximum depth of four was not able to accurately determine which splits in the data would be certain to lead to an outcome of death from Covid-19.
+
+![Branching](img/randomforest2.png)
+
+_Above: When the tree reaches max depth, it predicts the mode of the remaining y-values, which, due to data imbalances, will usually be cases not resulting in death_
+
+![Branching](img/randomforest3.png)
+
+_Above: Two of the Eight Decision Trees that Make Up Our Random Forest shown with Information Gain for each split_
+
+#### Naive Bayes
+
+![Branching](img/nb_scale.png)
+
+_Above: Scalability Graph_
+
+Another algorithm we chose to implement was Naive Bayes mainly due to the results from Naive Bayes can be used to visualize the scalability of our prediction model (see figure above). Naive Bayes serves as one of our probabilistic prediction models for supervised learning in order to predict, based on current data, what future labels might look like for each feature. Additionally, results from Naive Bayes can be used to visualize the scalability of our prediction model (see figure above). Based on the above figure, as the training examples increase, so do the fit times, though they do seem to slowly reach an equilibrium as time goes on and the curve flattens slightly. Naive Bayes generally has a lower accuracy and f1 score  when run using our data set compared to the previous Random Forest method, but still remains above 50% accuracy consistently.
+
+![Branching](img/nb_matrix.png)
+
+_Above: Confusion Matrix_
+
+We were able to improve the accuracy of Naive Bayes with a different method up to 89.06%, but the f1 score didn’t change much at around 62%. With this new method, we could also calculate the precision and recall, which were at about 49% and 86% respectively as well as plot the confusion matrix. From our confusion matrix, we have the predicted and expected labels and the data to calculate our precision, recall and f1-score. From the confusion matrix, we can interpret our predicted and expected labels to have 38864 true negatives (TN), 4582 false positives (FP), 720 false negatives (FN), and 4319 true positives (TP), which means we have 43183 true values and 5302 false values total. We calculate recall by R = TP/(TP + FN) = ~0.86 = 86%, precision by P = TP/(TP + FP) = ~0.49 = 49%, and f1-score by F = (2*R*P)/(R+P) = ~0.62 = 62%. In general, since Naive Bayes uses the feature independence assumption, when features are rarely truly independent, class probabilities output using naive Bayes can be fairly inaccurate. In other words, the Naive Bayes classifier assumes that the effect of the value of a predictor (x) on a given class (c) is independent of the values of other predictors. P(c|x) is the posterior probability of class (target) given predictor (attribute), and P(c) is the prior probability of class (Sayad). Naive Bayes has little to no hyperparameter tuning necessary, which lends to it generalizing well compared to other algorithms.
+
+![Branching](img/naivebayescode.png)
+
+_Above: Naive Bayes Code_
+
+The above code uses the GaussianNB library from sklearn to fit our training set and predict based on our test data, calculating the accuracy, precision, recall and f1 score from the y test set and results of predict on the x test set, where x is the above listed columns (sex, age_group, etc) and y and whether a death occurred.
+
+![Branching](img/nb_curve.png)
+
+_Above: Precision vs Recall Curve_
+
+From the figure you can see above, as the recall is increasing, the precision of the prediction from the Naive Bayes algorithm is decreasing in our case. The calculated recall and precision for our data occurs just before a rather steep decrease on the graph, where recall is 0.89 and precision is 0.49.
+
+![Branching](img/nb_bargraph.png)
+
+_Above: Bar Graph Comparison of Accuracy, Precision, Recall and F1-Score_
+
+The above bar graph simply displays the values of the accuracy (at 0.0 on the x-axis), precision (1.0), recall (2.0) and f1-score (3.0) in that order in graphical form to more easily compare the values.
+
+**Baseline Performance of Naive Bayes:**
+Setting the death_yn column to all ones in our training dataset and running Naive Bayes, we get the following statistics for our guesswork/baseline performance:
+Accuracy:  10.21
+Precision Score:  10.21
+Recall Score:  100.0
+F1 Score:  18.53
+This is expectedly low compared to running our supervised learning model on our original dataset.
+
+#### Neural Networks
+
+To accomplish our project’s goal, one of the other algorithms we’ve implemented was a neural network, as our project necessitates the use of an activation function to turn an unbounded input into an output with a predictable form. We used NN due to its capability of modeling and processing nonlinear relationships between the inputs(COVID death risk factors) and outputs in parallel. To do this, our implementation makes use of the sigmoid function, which always outputs values between 0 and 1. We had to One-hot encode our data due to the sigmoid function being unable to take in any categorical data.
+
+![Branching](img/nn1.png)
+
+_Above: One-hot encoded data_
+
+Because we did not have any optimal weights to assign to each of our features when creating the model since each input can have a different influence on the subsequent calculations in the inner layers and on the output layer of the entire network, we needed a way for our implementation to find the optimal weight for each feature algorithmically. Neural Networks can accomplish this through backpropagation, where the appropriate weight for a given feature is updated based on the accuracy of the given output when compared to the target output.  
+
+Since we did not know the optimal amounts of hidden layers needed to get the algorithm with the best performance, we decided to test out the accuracies of each run of the algorithm from 0,5,10,...40 numbers of the hyperparameter, hidden layers, with increments of 5 when tuning this hyperparameter. We set the learning rate(alpha) hyperparameter to 0.1 to ensure faster speed on training the NN. For time efficiency, we set the max Iteration hyperparameter to be 10 due to the timely cost of running the algorithm with over 400,000 data points. 
+
+On the feedforward of the neural network, we had a set of input features including  age, race, medcon, icu, and sex with random inital weights. 
+
+![Branching](img/nn2.png)
+
+_Above: Fast forward method implementation_
+
+Similar to training and test sets used in random forests, we separated 70% of the data into training data and the remaining 30% into test data, but in this algorithm, we did this to ensure a higher accuracy deterministic rather than focusing on recall since recall was already analyzed in random forests.
+
+In this case, we optimized our feature weights using back propagation, where we had our model calculate the error in a given prediction, and then updated our weight values and reran our code. After each iteration, we found our error to be decreasing and the accuracy of our algorithm to be increasing. If we had input values of  (0,0, 0,0….), the sum of the products of the input nodes and weights is always going to be zero, causing the weights of each feature input unable to be updated. In this case, the output will always be zero, no matter how much we train our model, due to the sigma activation function that we’ve used. To resolve this issue and make reliable predictions, we used the bias term to aid in making a robust neural network.
+
+![Branching](img/nn3.png)
+
+_Above: Backpropagation implementation_
+
+Since the number of training samples were large (~350,000), using gradient descent would take too long because in every iteration where we would be updating the values of the parameters, we would be running through the complete training set. Due to this, we decided to use the Stochastic Gradient Descent since it is faster because of us only using one training sample and it starts improving itself right away from the first sample. 
+
+![Branching](img/nn4.png)
+
+_Above: Stochastic gradient implementation in backpropagation_
+
+We then began to test the algorithm on the testing data to view the accuracy for each amount of the hidden layers. We ran the algorithm 5 times for each hidden layer amount and then calculated the average accuracy out of those 5 runs for better a deterministic of optimal values, as seen in the figures below. The highest average accuracy was 87%, which was received from having 35 hidden layers. 
+
+![Branching](img/nn5.png)
+
+_Above: Accuracy analysis per run of the NN with 5 hidden layers_
+
+As seen in the plot below, there is little to no change in accuracy between some of the hidden layer amounts, such as the accuracies with 0 hidden layers and 5 hidden layers having no change. After a guess performance diagnostics test where we changed the value of all our  testing data to 1, we had an accuracy of 17% from NN, which is close to the same percentage of the class distribution where 80% (0) and 15% (1). Since our performance is very close to the guesswork, this shows that NN did not learn from the data. This is primarily due to the dataset being severely unbalanced, where the majority of death classifications were 0 and a very small amount were 1, causing overfitting in our algorithm, making NN unable to learn effectively as seen below. 
+
+![Branching](img/nn6.png)
+
+_Above: Average accuracy of each hidden layer amount_
+
+#### Linear Regression
+
+Since our data consisted of categorical features and binary class labels, logistic regression was chosen as another supervised learning classification algorithm. Data was split in 80:20 ratio to training and test datasets. After the model was fit on the training set, it was run on the test data and returned a score of 0.938. However, the score seemed too high and after looking further into the results, the high score was due to the large imbalance of the dataset labels with a ratio of around 92:8 for labels of 0 and 1, respectively. The labels of 1 indicate a case of death. The model correctly classified most of the 0 labels and poorly classified the 1 labels. Recall was calculated to be 0.45. The model parameters for class weight in the code were changed to compensate for the imbalance and returned a score of 0.889 with an improved recall of 0.93.
+
+![Branching](img/regression1.png)
+
+![Branching](img/regression2.png)
+
+_Above: Confusion Matrix: count of true negatives = C<0,0>; false negatives = C<1,0>; true positives = C<1,1>; false positives = C<0,1>_
+
+Recall was our chosen performance metric because we wanted to minimize the number of false negatives since we placed a higher cost on giving a false negative death prediction than a false positive one. The regularization parameter was chosen to be C = 1.0 since it resulted in the highest score on the test data.
+
+![Branching](img/regression3.png)
+
+The weakness of logistic regression came from the large imbalance of data labels so that the model would be unable to strongly predict the minority of the 0 and 1 label data. The performance of this model was also measured using a receiver operating curve(ROC) which plots true positive rate vs. false positive rate at different classification thresholds. The area under the curve was high at 0.9576 which suggests good performance at classification prediction from the model.
+
+![Branching](img/regression4.png)
+
+### References:
+
+*   https://www.kaggle.com/rude009/heart-failure-model-prediction-comparisons-95 
+
+*   https://www.saedsayad.com/naive_bayesian.htm
+
