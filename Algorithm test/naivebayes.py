@@ -15,12 +15,23 @@ from sklearn.metrics import accuracy_score, precision_score, recall_score, plot_
 # create data frame containing your data, each column can be accessed # by df['column   name']
 df = pd.read_csv(r'C:\Users\Jujin\Desktop\cs-4641-group-44\training_data.csv')
 df2 = pd.read_csv(r'C:\Users\Jujin\Desktop\cs-4641-group-44\test_data.csv')
+df3 = pd.read_csv(r'C:\Users\Jujin\Desktop\cs-4641-group-44\cleaned_encoded_COVID_Data.csv')
 
-x = df2[['sex', 'age_group', 'race_ethnicity_combo', 'hosp_yn', 'icu_yn', 'medcond_yn']]
-y = df2[['death_yn']]
+
+# For baseline/guesswork performance
+# df = pd.read_csv(r'C:\Users\Jujin\Desktop\cs-4641-group-44\training_data_guess.csv')
+
+x = df3[['sex', 'age_group', 'race_ethnicity_combo', 'hosp_yn', 'icu_yn', 'medcond_yn']]
+y = df3[['death_yn']]
 
 # Splitting data into training and testing data
 x_train, x_test, y_train, y_test = train_test_split(x, y, random_state=1, test_size=0.2)
+
+# For baseline/guesswork performance
+# x_train = df[['sex', 'age_group', 'race_ethnicity_combo', 'hosp_yn', 'icu_yn', 'medcond_yn']]
+# x_test = df2[['sex', 'age_group', 'race_ethnicity_combo', 'hosp_yn', 'icu_yn', 'medcond_yn']]
+# y_train = df[['death_yn']]
+# y_test = df2[['death_yn']]
 
 # training_data = df
 # test_data = df2
