@@ -186,7 +186,7 @@ Another algorithm we chose to implement was Naive Bayes mainly due to the result
 
 _Above: Confusion Matrix_
 
-We were able to improve the accuracy of Naive Bayes with a different method up to 89.06%, but the f1 score didn’t change much at around 62%. With this new method, we could also calculate the precision and recall, which were at about 49% and 86% respectively as well as plot the confusion matrix. From our confusion matrix, we have the predicted and expected labels and the data to calculate our precision, recall and f1-score. From the confusion matrix, we can interpret our predicted and expected labels to have 38864 true negatives (TN), 4582 false positives (FP), 720 false negatives (FN), and 4319 true positives (TP), which means we have 43183 true values and 5302 false values total. We calculate recall by R = TP/(TP + FN) = ~0.86 = 86%, precision by P = TP/(TP + FP) = ~0.49 = 49%, and f1-score by F = (2*R*P)/(R+P) = ~0.62 = 62%. In general, since Naive Bayes uses the feature independence assumption, when features are rarely truly independent, class probabilities output using naive Bayes can be fairly inaccurate. In other words, the Naive Bayes classifier assumes that the effect of the value of a predictor (x) on a given class (c) is independent of the values of other predictors. P(c|x) is the posterior probability of class (target) given predictor (attribute), and P(c) is the prior probability of class (Sayad). Naive Bayes has little to no hyperparameter tuning necessary, which lends to it generalizing well compared to other algorithms.
+We were able to improve the accuracy of Naive Bayes with a different method up to 89.06%, but the f1 score didn’t change much at around 62%. With this new method, we could also calculate the precision and recall, which were at about 49% and 86% respectively as well as plot the confusion matrix. From our confusion matrix, we have the predicted and expected labels and the data to calculate our precision, recall and f1-score. From the confusion matrix, we can interpret our predicted and expected labels to have 38864 true negatives (TN), 4582 false positives (FP), 720 false negatives (FN), and 4319 true positives (TP), which means we have 43183 true values and 5302 false values total. We calculate recall by R = TP/(TP + FN) = ~0.86 = 86%, precision by P = TP/(TP + FP) = ~0.49 = 49%, and f1-score by F = (2*R*P)/(R+P) = ~0.62 = 62%. In general, since Naive Bayes uses the feature independence assumption, when features are rarely truly independent, class probabilities output using naive Bayes can be fairly inaccurate. In other words, the Naive Bayes classifier assumes that the effect of the value of a predictor (x) on a given class (c) is independent of the values of other predictors. P(c \|\ x) is the posterior probability of class (target) given predictor (attribute), and P(c) is the prior probability of class (Sayad). Naive Bayes has little to no hyperparameter tuning necessary, which lends to it generalizing well compared to other algorithms.
 
 ![Branching](img/naivebayescode.png)
 
@@ -208,10 +208,15 @@ The above bar graph simply displays the values of the accuracy (at 0.0 on the x-
 
 **Baseline Performance of Naive Bayes:**
 Setting the death_yn column to all ones in our training dataset and running Naive Bayes, we get the following statistics for our guesswork/baseline performance:
+
 Accuracy:  10.21
+
 Precision Score:  10.21
+
 Recall Score:  100.0
+
 F1 Score:  18.53
+
 This is expectedly low compared to running our supervised learning model on our original dataset.
 
 #### Neural Networks
@@ -252,7 +257,7 @@ We then began to test the algorithm on the testing data to view the accuracy for
 
 _Above: Accuracy analysis per run of the NN with 5 hidden layers_
 
-As seen in the plot below, there is little to no change in accuracy between some of the hidden layer amounts, such as the accuracies with 0 hidden layers and 5 hidden layers having no change. After a guess performance diagnostics test where we changed the value of all our  testing data to 1, we had an accuracy of 17% from NN, which is close to the same percentage of the class distribution where 80% (0) and 15% (1). Since our performance is very close to the guesswork, this shows that NN did not learn from the data. This is primarily due to the dataset being severely unbalanced, where the majority of death classifications were 0 and a very small amount were 1, causing overfitting in our algorithm, making NN unable to learn effectively as seen below. 
+As seen in the plot below, there is little to no change in accuracy between some of the hidden layer amounts, such as the accuracies with 0 hidden layers and 5 hidden layers having no change. After a **guess performance diagnostics test** where we changed the value of all our  testing data to 1, we had an accuracy of 17% from NN, which is close to the same percentage of the class distribution where 80% (0) and 15% (1). Since our performance is very close to the guesswork, this shows that NN did not learn from the data. This is primarily due to the dataset being severely unbalanced, where the majority of death classifications were 0 and a very small amount were 1, causing overfitting in our algorithm, making NN unable to learn effectively as seen below. 
 
 ![Branching](img/nn6.png)
 
