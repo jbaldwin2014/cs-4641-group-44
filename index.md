@@ -267,11 +267,14 @@ _Above: Average accuracy of each hidden layer amount_
 
 Since our data consisted of categorical features and binary class labels, logistic regression was chosen as another supervised learning classification algorithm. Data was split in 80:20 ratio to training and test datasets. 
 
-The code uses the Logistic Regression library imported from sklearn.linear_model to fit our model to the training set and outputs a report including precision, recall, f1 score as well as a confusion matrix. The model training/fitting is done by calculating the best weights w₀, w₁, …, wᵣ in the equation p(x) = w₀ + w₁𝑥₁ + ⋯ + wᵣ𝑥ᵣ so that sigmoid function(in order to binary classify into 1 or 0) h(𝐱) = 1 / (1 + e^(−p(𝐱)) is as close as possible to the ground truth data(y). This is done with an objective function that maximizes the log-likelihood for N observations. w6
+The code uses the Logistic Regression library imported from sklearn.linear_model to fit our model to the training set and outputs a report including precision, recall, f1 score as well as a confusion matrix. The model training/fitting is done by calculating the best weights w₀, w₁, …, wᵣ in the equation p(x) = w₀ + w₁𝑥₁ + ⋯ + wᵣ𝑥ᵣ so that sigmoid function(in order to binary classify into 1 or 0) h(𝐱) = 1 / (1 + e^(−p(𝐱)) is as close as possible to the ground truth data(y). This is done with an objective function that maximizes the log-likelihood for N observations.
+![Branching](img/cs4641logregr4.png)
  
 Weights/Estimators from our training data:
 [w₁, …, w6] = [0.30271562, 0.8752152, 0.07574934, 2.00312203, 2.44653314, 1.2487788]
+
 w₀  = -7.93599921
+
 Then the model is run on the x test data and outputs a score of classification accuracy compared to the y test data. The model classifies each datapoint by assuming a threshold/decision boundary of 0.5 and predicts class = 1 if h(𝐱) ≥ 0.5 and predicts class = 0 if h(𝐱) < 0.5.
 
 
