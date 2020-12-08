@@ -263,7 +263,7 @@ As seen in the plot below, there is little to no change in accuracy between some
 
 _Above: Average accuracy of each hidden layer amount_
 
-#### Linear Regression
+#### Logistic Regression
 
 Since our data consisted of categorical features and binary class labels, logistic regression was chosen as another supervised learning classification algorithm. Data was split in 80:20 ratio to training and test datasets. After the model was fit on the training set, it was run on the test data and returned a score of 0.938. However, the score seemed too high and after looking further into the results, the high score was due to the large imbalance of the dataset labels with a ratio of around 92:8 for labels of 0 and 1, respectively. The labels of 1 indicate a case of death. The model correctly classified most of the 0 labels and poorly classified the 1 labels. Recall was calculated to be 0.45. The model parameters for class weight in the code were changed to compensate for the imbalance and returned a score of 0.889 with an improved recall of 0.93.
 
