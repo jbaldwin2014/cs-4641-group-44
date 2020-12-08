@@ -70,3 +70,18 @@ print(model.score(xtest,ytest))
 alphas(LassoCV(random_state=0), x, y)
 model2 = Lasso()
 visualizer = prediction_error(model2, x, y, xtest, ytest)
+
+#ROC,AUC
+y_score2 = model.predict_proba(xtest)[:,1]
+false_positive_rate2, true_positive_rate2, threshold2 = roc_curve(ytest, y_score2)
+print('roc_auc_score for Logistic Regression: ', roc_auc_score(ytest, y_score2))
+
+plt.subplots(1, figsize=(10,10))
+plt.title('Receiver Operating Characteristic - Logistic regression')
+plt.plot(false_positive_rate2, true_positive_rate2)
+plt.plot([0, 1], ls="--")
+plt.plot([0, 0], [1, 0] , c=".7"), plt.plot([1, 1] , c=".7")
+plt.ylabel('True Positive Rate')
+plt.xlabel('False Positive Rate')
+plt.show()
+
