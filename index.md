@@ -283,7 +283,7 @@ The weakness of logistic regression came from the large imbalance of data labels
 
 #### Performance Summary
 
-Overall, Random Forest had the best accuracy at 98.7%, though it fell short when it came to recall at 61.8%. This result was somewhat expected due to it being able to create random data that can account for our data being unbalanced, which is one of the only limitations for supervised learning. Linear Regression seems to be the most balanced model, having 88.9% accuracy with a recall of 93%. Neural Networks and Naive Bayes had decent accuracy in the high 80s (88-89%) but lower recall than Linear Regression.
+Overall, Random Forest had the best accuracy at 98.7%, though it fell short when it came to recall at 61.8%. This result was somewhat expected due to it being able to create random data that can account for our data being unbalanced, which is one of the only limitations for supervised learning. Logistic Regression seems to be the most balanced model, having 88.9% accuracy with a recall of 93%. Neural Networks and Naive Bayes had decent accuracy in the high 80s (88-89%) but lower recall than Logistic Regression.
 
 ### References:
 
