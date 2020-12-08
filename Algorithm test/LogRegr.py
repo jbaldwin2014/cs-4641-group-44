@@ -42,7 +42,9 @@ for i in range(len(ytemptest)): # to fix mixed datatype problem
 
 # Step 3: Create a model and train it
 model = LogisticRegression(solver='liblinear', random_state=0)
+model2 = LogisticRegression(solver='liblinear', random_state=0, class_weight='balanced', C = 1.0)
 model.fit(x, y)
+model2.fit(x, y)
 
 # Step 4: Evaluate the model
 p_pred = model.predict_proba(x)
